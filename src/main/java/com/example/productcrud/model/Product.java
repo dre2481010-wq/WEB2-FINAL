@@ -8,7 +8,7 @@ public class Product {
 
     private Long id;
     private String name;
-    private String category;
+    private Category category;
     private long price;
     private int stock;
     private String description;
@@ -19,7 +19,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String name, String category, long price, int stock,
+    public Product(Long id, String name, Category category, long price, int stock,
                    String description, boolean active, LocalDate createdAt) {
         this.id = id;
         this.name = name;
@@ -47,11 +47,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

@@ -1,5 +1,6 @@
 package com.example.productcrud.service;
 
+import com.example.productcrud.model.Category;
 import com.example.productcrud.model.Product;
 import org.springframework.stereotype.Service;
 
@@ -15,27 +16,27 @@ public class ProductService {
     private Long nextId = 7L;
 
     public ProductService() {
-        products.add(new Product(1L, "Laptop ASUS ROG", "Elektronik",
+        products.add(new Product(1L, "Laptop ASUS ROG", Category.ELEKTRONIK,
                 18500000, 8, "Laptop gaming ASUS ROG dengan prosesor terbaru dan kartu grafis RTX",
                 true, LocalDate.of(2025, 1, 15)));
 
-        products.add(new Product(2L, "Mouse Logitech MX Master", "Elektronik",
+        products.add(new Product(2L, "Mouse Logitech MX Master", Category.ELEKTRONIK,
                 1200000, 35, "Mouse wireless ergonomis dengan sensor presisi tinggi",
                 true, LocalDate.of(2025, 2, 10)));
 
-        products.add(new Product(3L, "Buku Java Programming", "Buku",
+        products.add(new Product(3L, "Buku Java Programming", Category.BUKU,
                 150000, 30, "Buku panduan lengkap pemrograman Java dari dasar hingga mahir",
                 true, LocalDate.of(2025, 3, 5)));
 
-        products.add(new Product(4L, "Kopi Arabica Toraja 250g", "Makanan",
+        products.add(new Product(4L, "Kopi Arabica Toraja 250g", Category.MAKANAN,
                 85000, 100, "Kopi arabica premium dari Toraja dengan cita rasa khas",
                 true, LocalDate.of(2025, 4, 20)));
 
-        products.add(new Product(5L, "Headphone Sony WH-1000XM5", "Elektronik",
+        products.add(new Product(5L, "Headphone Sony WH-1000XM5", Category.ELEKTRONIK,
                 4500000, 15, "Headphone wireless dengan noise cancelling terbaik di kelasnya",
                 true, LocalDate.of(2025, 5, 1)));
 
-        products.add(new Product(6L, "Kemeja Batik Premium", "Pakaian",
+        products.add(new Product(6L, "Kemeja Batik Premium", Category.PAKAIAN,
                 350000, 50, "Kemeja batik premium motif parang dengan bahan katun berkualitas",
                 false, LocalDate.of(2025, 6, 12)));
     }
@@ -67,13 +68,5 @@ public class ProductService {
 
     public void deleteById(Long id) {
         products.removeIf(p -> p.getId().equals(id));
-    }
-
-    public List<String> getAllCategories() {
-        return products.stream()
-                .map(Product::getCategory)
-                .distinct()
-                .sorted()
-                .toList();
     }
 }

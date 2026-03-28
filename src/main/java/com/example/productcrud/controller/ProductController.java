@@ -1,5 +1,6 @@
 package com.example.productcrud.controller;
 
+import com.example.productcrud.model.Category;
 import com.example.productcrud.model.Product;
 import com.example.productcrud.service.ProductService;
 import java.time.LocalDate;
@@ -43,7 +44,7 @@ public class ProductController {
         Product product = new Product();
         product.setCreatedAt(LocalDate.now());
         model.addAttribute("product", product);
-        model.addAttribute("categories", productService.getAllCategories());
+        model.addAttribute("categories", Category.values());
         return "product/form";
     }
 
@@ -59,7 +60,7 @@ public class ProductController {
         return productService.findById(id)
                 .map(product -> {
                     model.addAttribute("product", product);
-                    model.addAttribute("categories", productService.getAllCategories());
+                    model.addAttribute("categories", Category.values());
                     return "product/form";
                 })
                 .orElse("redirect:/products");
