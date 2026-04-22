@@ -5,7 +5,7 @@ public class RegisterRequest {
     private String password;
     private String confirmPassword;
 
-    public RegisterRequest() {
+    public RegisterRequest(){
     }
 
     public String getUsername() {

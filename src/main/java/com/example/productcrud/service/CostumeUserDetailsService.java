@@ -1,23 +1,22 @@
 package com.example.productcrud.service;
 
+import com.example.productcrud.model.User;
 import com.example.productcrud.repository.UserRepository;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CostumeUserDetailsService implements UserDetailsService {
+public class CostumeUserDetailsService implements UserDetailsService{
+    private  final UserRepository userRepository;
 
-    private final UserRepository userRepository;
-
-    public CostumeUserDetailsService(UserRepository userRepository) {
+    public CostumeUserDetailsService(final UserRepository userRepository){
         this.userRepository = userRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User tidak ditemukan: " + username));
 
@@ -26,6 +25,5 @@ public class CostumeUserDetailsService implements UserDetailsService {
                 .password(user.getPassword())
                 .roles("USER")
                 .build();
-
     }
 }

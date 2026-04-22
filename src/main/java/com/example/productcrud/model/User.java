@@ -2,12 +2,13 @@ package com.example.productcrud.model;
 
 import jakarta.persistence.*;
 
+
 @Entity
-@Table(name ="users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -15,20 +16,21 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    public User() {
+    public User(){
+
     }
 
-    public User(long id, String username, String password) {
+    public User(final Long id, final String username, final String password){
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public long getId() {
+    public Long getId(){
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,7 +46,7 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password){
         this.password = password;
     }
 }

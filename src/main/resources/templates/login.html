@@ -3,53 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Login - Product CRUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
-<body class="bg-light">
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-5">
-            <div class="card shadow">
-                <div class="card-body p-4">
-                    <h3 class="card-title text-center mb-4">Login</h3>
 
-                    <!-- Error: username/password salah -->
-                    <div th:if="${param.error}" class="alert alert-danger">
+<body class="min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-200 flex items-center justify-center">
+
+<div class="container w-full">
+    <div class="row justify-content-center mt-5 flex justify-center">
+        <div class="col-md-5 w-full max-w-md">
+
+            <div class="card shadow bg-white rounded-2xl shadow-xl">
+                <div class="card-body p-4 p-8">
+
+                    <h3 class="card-title text-center mb-4 text-2xl font-bold text-gray-800">
+                        Login
+                    </h3>
+
+                    <!-- Error -->
+                    <div th:if="${param.error}"
+                         class="mb-4 px-4 py-3 rounded-lg bg-red-100 border border-red-300 text-red-700 text-sm">
                         Username atau password salah!
                     </div>
 
-                    <!-- Info: berhasil logout -->
-                    <div th:if="${param.logout}" class="alert alert-info">
+                    <!-- Logout -->
+                    <div th:if="${param.logout}"
+                         class="mb-4 px-4 py-3 rounded-lg bg-blue-100 border border-blue-300 text-blue-700 text-sm">
                         Berhasil logout.
                     </div>
 
-                    <!-- Success: registrasi berhasil (flash attribute) -->
-                    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+                    <!-- Success -->
+                    <div th:if="${success}"
+                         class="mb-4 px-4 py-3 rounded-lg bg-green-100 border border-green-300 text-green-700 text-sm"
+                         th:text="${success}">
+                    </div>
 
                     <form th:action="@{/login}" method="post">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username"
+
+                        <div class="mb-3 mb-5">
+                            <label for="username"
+                                   class="block mb-2 text-sm font-semibold text-gray-700">
+                                Username
+                            </label>
+                            <input type="text" id="username" name="username"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                                    placeholder="Masukkan username" required autofocus>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
+
+                        <div class="mb-3 mb-6">
+                            <label for="password"
+                                   class="block mb-2 text-sm font-semibold text-gray-700">
+                                Password
+                            </label>
+                            <input type="password" id="password" name="password"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                                    placeholder="Masukkan password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
+
+                        <button type="submit"
+                                class="w-full py-2.5 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition duration-200">
+                            Login
+                        </button>
                     </form>
 
-                    <div class="text-center mt-3">
+                    <div class="text-center mt-4 text-sm text-gray-600">
                         <span>Belum punya akun? </span>
-                        <a th:href="@{/register}">Daftar di sini</a>
+                        <a th:href="@{/register}"
+                           class="text-blue-500 font-semibold hover:underline">
+                            Daftar di sini
+                        </a>
                     </div>
+
+                    <div class="text-center mt-4 text-sm text-gray-600">
+                        <a th:href="@{/ChangePassword}"
+                           class="text-black font-semibold hover:underline">
+                            Lupa Password?
+                        </a>
+                    </div>
+
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+
 </body>
 </html>

@@ -2,18 +2,15 @@ package com.example.productcrud.model;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.databind.annotation.EnumNaming;
-import jakarta.annotation.Generated;
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
-@Table(name = "Products")
+@Table(name = "products")
 public class Product {
+
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 200)
@@ -24,10 +21,9 @@ public class Product {
     private Category category;
 
     private long price;
-
     private int stock;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "Text")
     private String description;
 
     private boolean active;
