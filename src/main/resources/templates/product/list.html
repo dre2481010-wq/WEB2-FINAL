@@ -78,7 +78,55 @@
             </table>
         </div>
 
-        <!-- Empty State -->
+        <form th:action="@{/products}" method="get" class="d-flex gap-2">
+            <input type="text" name="keyword" class="form-control"
+                   placeholder="Cari produk..." th:value="${keyword}">
+
+            <!-- Dropdown filter baru -->
+            <select name="category" class="form-select">
+                <option value="">Semua Kategori</option>
+                <option th:each="cat : ${categories}"
+                        th:value="${cat}"
+                        th:text="${cat.displayName}"
+                        th:selected="${cat == selectedCategory}">
+                </option>
+            </select>
+
+            <nav th:if="${totalPages > 1}">
+                <ul class="pagination justify-content-center">
+                    <!-- Prev -->
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/products(page=${currentPage - 1}, keyword=${keyword}, category=${selectedCategory})}">
+                            &laquo;
+                        </a>
+                    </li>
+
+                    <!-- Nomor halaman -->
+                    <li class="page-item"
+                        th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:classappend="${i == currentPage} ? 'active'">
+                        <a class="page-link"
+                           th:href="@{/products(page=${i}, keyword=${keyword}, category=${selectedCategory})}"
+                           th:text="${i + 1}">
+                        </a>
+                    </li>
+
+                    <!-- Next -->
+                    <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/products(page=${currentPage + 1}, keyword=${keyword}, category=${selectedCategory})}">
+                            &raquo;
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a th:href="@{/products}" class="btn btn-outline-secondary">Reset</a>
+        </form>
+
+            <!-- Empty State -->
         <div th:if="${#lists.isEmpty(products)}" class="text-center py-5">
             <p class="text-muted fs-5">Belum ada produk.</p>
             <a th:href="@{/products/new}" class="btn btn-primary">Tambah Produk Pertama</a>

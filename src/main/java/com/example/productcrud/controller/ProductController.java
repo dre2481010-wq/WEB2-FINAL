@@ -4,6 +4,7 @@ import com.example.productcrud.model.Category;
 import com.example.productcrud.model.Product;
 import com.example.productcrud.service.ProductService;
 import java.time.LocalDate;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +25,21 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public String listProducts(Model model) {
-        model.addAttribute("products", productService.findAll());
+    public String listProducts(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Category category,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            Model model) {
+
+        Page<Product> productPage = productService.findFiltered(keyword, category, page, size);
+        model.addAttribute("products", productPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("totalItems", productPage.getTotalElements());
+        model.addAttribute("categories", Category.values());
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("selectedCategory", category);
         return "product/list";
     }
 
