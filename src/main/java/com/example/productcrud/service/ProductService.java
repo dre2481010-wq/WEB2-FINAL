@@ -71,7 +71,7 @@ public class ProductService {
                 .collect(Collectors.groupingBy(Product::getCategory, Collectors.counting()));
 
         List<Product> lowStockProducts = allProducts.stream()
-                .filter(p -> p.getStock() < 5).collect(Collectors.toList());
+                .filter(p -> p.getStock() <= 5).collect(Collectors.toList());
 
         stats.put("totalProducts", totalProducts);
         stats.put("totalValue", totalInventoryValue);
