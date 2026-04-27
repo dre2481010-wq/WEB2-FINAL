@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: header}">
+    <title>User Profile</title>
+</head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 500px;">
+        <div class="card-header bg-primary text-white">
+            <h2 class="h5 mb-0">User Profile</h2>
+        </div>
+        <div class="card-body text-center">
+            <img th:src="${user.profileImageUrl != null && !user.profileImageUrl.isEmpty() ? user.profileImageUrl : 'https://via.placeholder.com/150'}"
+                 alt="Profile" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+
+            <h3 th:text="${user.fullName ?: user.username}">Nama Lengkap</h3>
+            <p class="text-muted" th:text="${user.email ?: 'Email belum diisi'}">email@example.com</p>
+
+            <ul class="list-group list-group-flush text-start mb-3">
+                <li class="list-group-item"><strong>Phone: </strong> <span th:text="${user.phoneNumber ?: '-'}"></span></li>
+                <li class="list-group-item"><strong>Address: </strong> <span th:text="${user.address ?: '-'}"></span></li>
+                <li class="list-group-item"><strong>Bio: </strong> <span th:text="${user.bio ?: '-'}"></span></li>
+            </ul>
+
+            <a th:href="@{/profile/edit}" class="btn btn-warning w-100">Edit Profile</a>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

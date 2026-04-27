@@ -4,7 +4,6 @@ import com.example.productcrud.dto.RegisterRequest;
 import com.example.productcrud.model.User;
 import com.example.productcrud.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.webauthn.management.UserCredentialRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,7 +58,7 @@ public class AuthController {
         }
 
         // Validasi: username belum terdaftar
-        if (userRepository.findByUsername(registerRequest.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(registerRequest.getUsername()) != null) {
             redirectAttributes.addFlashAttribute("error", "Username sudah terdaftar");
             return "redirect:/register";
         }
@@ -68,6 +67,8 @@ public class AuthController {
         User user = new User();
         user.setUsername(registerRequest.getUsername().trim());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        user.setFullName(registerRequest.getFullName());
+        user.setEmail(registerRequest.getEmail());
         userRepository.save(user);
 
         redirectAttributes.addFlashAttribute("success", "Registrasi berhasil! Silakan login.");

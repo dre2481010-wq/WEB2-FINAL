@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: header}">
+    <title>Edit Profile</title>
+</head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0">Edit User Profile</h4>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/profile/update}" th:object="${user}" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" th:field="*{fullName}" class="form-control" placeholder="Masukkan nama lengkap">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" th:field="*{email}" class="form-control" placeholder="nama@email.com">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Nomor HP</label>
+                    <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="0812xxxxxxxx">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Alamat</label>
+                    <input type="text" th:field="*{address}" class="form-control" placeholder="Alamat lengkap">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Bio</label>
+                    <textarea th:field="*{bio}" class="form-control" rows="3" placeholder="Ceritakan sedikit tentang dirimu..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">URL Foto Profil</label>
+                    <input type="text" th:field="*{profileImageUrl}" class="form-control" placeholder="https://link-foto.com/gambar.jpg">
+                    <div class="form-text">Tempelkan link foto dari internet di sini.</div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+                    <a th:href="@{/profile}" class="btn btn-secondary">Batal</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

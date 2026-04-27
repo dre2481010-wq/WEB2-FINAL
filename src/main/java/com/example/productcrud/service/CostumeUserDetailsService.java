@@ -17,8 +17,11 @@ public class CostumeUserDetailsService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User tidak ditemukan: " + username));
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User tidak ditemukan: " + username);
+        }
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())

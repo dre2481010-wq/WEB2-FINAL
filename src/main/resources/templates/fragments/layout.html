@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<!-- Header Fragment -->
 <head th:fragment="header">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,6 @@
     <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 
-<!-- Navbar Fragment -->
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4"
      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <div class="container">
@@ -26,7 +24,18 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/products}">Products</a>
                 </li>
+
+                <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Account
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/profile}">My Profile</a></li>
+                        <li><a class="dropdown-item" th:href="@{/profile/change-password}">Change Password</a></li>
+                    </ul>
+                </li>
             </ul>
+
             <div class="d-flex align-items-center" sec:authorize="isAuthenticated()">
                 <span class="text-light me-3">
                     Halo, <strong th:text="${#authentication.name}">User</strong>
@@ -39,7 +48,6 @@
     </div>
 </nav>
 
-<!-- Footer Fragment -->
 <footer th:fragment="footer">
     <div class="container">
         <hr>
